@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    button{
+        margin-left: 125px;
+        margin-top: 10px;
+    }
+    
+    .form-group{
+        display: inline-block;
+    }
+    table{
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <div class="form-group">
+        <form action="/add_book" method="POST">
+            {% csrf_token %}
+            <h1>Add a Book</h1>
+            <h3>Title</h3> <textarea class="form-control" name="book_title" style="width: 300px" rows="1"></textarea>
+            <h3>Description</h3> <textarea class="form-control" name="book_descrip" style="width: 300px" rows="3"></textarea>
+            <button class="btn btn-primary">Add</button>
+        </form>    
+    </div>    
+    <div class="table">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope='col'>ID</th>
+                    <th scope='col'>Title</th>
+                    <th scope='col'> Action</th>
+                    {% for book in book_info%}
+                        <tr>
+                            <td>{{book.id}}</td>
+                            <td>{{book.title}}</td>
+                            <td><a href="/book_info/{{ book.id }}">View</a></td>
+                        </tr>
+                    {% endfor %}    
+                </tr>    
+            </thead>
+        </table>
+    </div>    
+</body>
+</html>

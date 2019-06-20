@@ -1,0 +1,8 @@
+>>> book2=Book.objects.get(id=2)
+>>> author5=Author.objects.get(id=5)
+>>> book2.add(author5)
+
+
+>>> author3=Author.objects.get(id=3)
+
+book5=Book.objects.get(id=5)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <form action="new_author" method="POST">
+            {% csrf_token %}
+            <h1>Add an Author</h1>
+            <h3>First Name: </h3><textarea class="form-control" name="first_name" style="width: 300px" rows="1"></textarea>
+            <h3>Last Name: </h3><textarea class="form-control" name="last_name" style="width: 300px" rows="1"></textarea>
+            <h3>Notes: </h3><textarea class="form-control" name="notes" style="width: 300px" rows="1"></textarea>
+            <button class="btn btn-primary">Add</button>
+        </form>
+    </div>
+    <div class="table">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope='col'>ID</th>
+                        <th scope='col'>Name</th>
+                        <th scope='col'> Action</th>
+                            {% for author in all_authors %}
+                            <tr>
+                                <td>{{author.id}}</td>
+                                <td>{{author.first_name}} {{author.last_name}}</td>
+                                <td><a href="/authors/{{author.id}}">View</a></td>
+                            </tr>
+                            {% endfor %}
+                    </tr>    
+                </thead>
+            </table>
+        </div>    
+</body>
+</html>

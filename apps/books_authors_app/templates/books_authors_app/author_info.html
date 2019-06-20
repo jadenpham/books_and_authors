@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <h1>{{all_info.first_name}} {{all_info.last_name}}</h1>
+        <h3>ID: {{all_info.id}}</h3>
+        <h3>Notes: {{all_info.notes}}</h3>
+    </div>
+    <div>
+        <h3>Books: </h3>
+        <ul>
+            {% for book in related_books %}
+            <li>{{ book.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <form action="/authors/{{all_info.id}}/book_to_author" method="POST">
+            {% csrf_token %}
+            <select name="new_book">
+                {% for book in all_books %}
+                <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="author_id" value={{all_info.id}}>
+            <button class="btn btn-primary">Add</button>
+        </form>
+    </div> 
+</body>
+</html>
